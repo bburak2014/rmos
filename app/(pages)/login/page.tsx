@@ -40,14 +40,21 @@ export default function LoginPage(): JSX.Element {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <Image src="/logo.png" alt="logo" width={128} height={64} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={128}
+            height={63}
+            style={{ objectFit: "cover",width:"auto", height:"auto" }}
+            priority
+          />
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -57,7 +64,7 @@ export default function LoginPage(): JSX.Element {
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  name="userName"
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
@@ -87,8 +94,7 @@ export default function LoginPage(): JSX.Element {
                       id="remember"
                       aria-describedby="remember"
                       type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-indigo-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-indigo-600 dark:ring-offset-gray-800"
-                      required
+                      className="w-4 h-4 border cursor-pointer border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-indigo-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-indigo-600 dark:ring-offset-gray-800"
                     />
                   </div>
                   <div className="ml-3 text-sm">
@@ -107,7 +113,11 @@ export default function LoginPage(): JSX.Element {
               >
                 Sign in
               </button>
-              {error && <p className="error">{error}</p>}
+              {error && (
+                <p className="error text-red-500 text-center font-bold animate-fadeIn">
+                  {error}
+                </p>
+              )}
             </form>
           </div>
         </div>
