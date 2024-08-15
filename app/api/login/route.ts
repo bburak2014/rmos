@@ -1,11 +1,9 @@
-// app/api/login/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
-import { cookies } from 'next/headers'; // next/headers'ı kullanarak cookie'lere erişim
+import { cookies } from 'next/headers';
 
 export async function POST(request: NextRequest) {
-  const formData = await request.json();
-  const { userName, password } = formData;
+  const { userName, password } = await request.json();
 
   try {
     const response = await axios.post('https://service.rmosweb.com/security/createToken', {
@@ -16,23 +14,22 @@ export async function POST(request: NextRequest) {
     if (response.status === 200) {
       const token = response.data;
 
-      // Cookie'yi ayarla (server-side)
-      const cookieStore = cookies()
+      const cookieStore = cookies();
       cookieStore.set('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 60 , // 1 hafta
+        maxAge:  60,  
         path: '/',
       });
 
       return NextResponse.json({ success: true });
     }
   } catch (error: any) {
-    let errorMessage = 'An error occurred';
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response?.data?.message || errorMessage;
-    }
+    const errorMessage = axios.isAxiosError(error) && error.response
+      ? error.response.data?.message || 'An error occurred'
+      : 'An error occurred';
+
     return new NextResponse(errorMessage, { status: error.response?.status || 500 });
   }
 }
