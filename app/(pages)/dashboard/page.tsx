@@ -2,6 +2,8 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import DataGrid from "@/app/components/DataGrid";
 import ErrorUI from "@/app/components/ErrorUI";
+import DataCharts from "@/app/components/DataCharts";
+
 export default async function Page() {
   const dummy = {
     db_Id: 9,
@@ -52,7 +54,14 @@ export default async function Page() {
     error = err;
   }
 
+  if (error) {
+    return <ErrorUI />;
+  }
+
   return (
-    <>{error ? <ErrorUI /> : data?.length > 0 && <DataGrid data={data} />}</>
+   <>
+   <DataGrid data={data} token={token?.toString() || ""} />
+   <DataCharts  data={data}  />
+   </> 
   );
 }
