@@ -1,4 +1,4 @@
-export const gridHeads = [
+export const stpGridHeads = [
   {
     field: "Tarih",
     filter: true,
@@ -7,7 +7,7 @@ export const gridHeads = [
     valueFormatter: (params: any) => {
       const date = new Date(params.value);
       const day = date.getDate().toString().padStart(2, "0");
-      const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Ayları 0-11 arasında olduğu için 1 ekliyoruz
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const year = date.getFullYear();
       return `${day} ${month} ${year}`;
     },
@@ -140,40 +140,198 @@ export const gridHeads = [
   { field: "Şirket", filter: true, sortable: true, hide: true },
 ];
 
-export  const initialValues: any = {
-    db_Id: 9,
-    xRez_Sirket: 9,
-    xBas_Tar: "2024-06-01",
-    xBit_Tar: "2024-06-19",
-    xtip: 1,
-    kon1: "ALL",
-    kon2: "BB",
-    xchkFis_Fazla_otel_10: 0,
-    bas_Yil: 2022,
-    bit_Yil: 2022,
-    fisrci_Kapalioda_10: 0,
-    xRez_C_W: "C",
-    xSistem_Tarihi: "2024-03-01",
-    xAlis_Tarihi: "2024-01-01",
-    sistem_Bas1: "2020-01-01",
-    sistem_Bit1: "2029-01-01",
-    pmdahil_10: 0,
-    tip_1: "001",
-    xFis_Bela_tutar_10: 0,
-    trace_Dus_10: 0,
-    cev_01: null,
-  };
+export const initialValues: any = {
+  db_Id: 9,
+  xRez_Sirket: 9,
+  xBas_Tar: "2024-06-01",
+  xBit_Tar: "2024-06-19",
+  xtip: 1,
+  kon1: "ALL",
+  kon2: "BB",
+  xchkFis_Fazla_otel_10: 0,
+  bas_Yil: 2022,
+  bit_Yil: 2022,
+  fisrci_Kapalioda_10: 0,
+  xRez_C_W: "C",
+  xSistem_Tarihi: "2024-03-01",
+  xAlis_Tarihi: "2024-01-01",
+  sistem_Bas1: "2020-01-01",
+  sistem_Bit1: "2029-01-01",
+  pmdahil_10: 0,
+  tip_1: "001",
+  xFis_Bela_tutar_10: 0,
+  trace_Dus_10: 0,
+  cev_01: null,
+};
 
-  export function getData() {
-    return [
-      {
-        quarter: "Q1'18",
-        iphone: 140,
-        mac: 16,
-        ipad: 14,
-        wearables: 12,
-        services: 20,
-      },
-       
-    ];
-  }
+export function getData() {
+  return [
+    {
+      quarter: "Q1'18",
+      iphone: 140,
+      mac: 16,
+      ipad: 14,
+      wearables: 12,
+      services: 20,
+    },
+  ];
+}
+export const StpClassicc = {
+  db_Id: 9,
+  xRez_Sirket: 9,
+  xBas_Tar: "2024-06-01",
+  xBit_Tar: "2024-06-10",
+  xtip: 1,
+  kon1: "ALL",
+  kon2: "BB",
+  xchkFis_Fazla_otel_10: 0,
+  bas_Yil: 2022,
+  bit_Yil: 2022,
+  fisrci_Kapalioda_10: 0,
+  xRez_C_W: "C",
+  xSistem_Tarihi: "2024-01-01",
+  xAlis_Tarihi: "2024-01-01",
+  sistem_Bas1: "2020-01-01",
+  sistem_Bit1: "2029-01-01",
+  pmdahil_10: 0,
+  tip_1: "001",
+  xFis_Bela_tutar_10: 0,
+  trace_Dus_10: 0,
+  cev_01: null,
+};
+export const BlackListDummyData = {
+  db_Id: 9,
+  Adi: "ALL?",
+};
+
+export const BlackListHead = [
+  {
+    field: "Id",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Adi",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Soy",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Aciklama",
+    filter: true,
+    sortable: true,
+    width: 400,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Tcno",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Dogum_tarihi",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) => {
+      if (!params.value) return " ";
+      const date = new Date(params.value);
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day} ${month} ${year}` || " ";
+    },
+  },
+  {
+    field: "Sistem_tarihi",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) => {
+      if (!params.value) return " ";
+      const date = new Date(params.value);
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day} ${month} ${year}` || " ";
+    },
+  },
+  {
+    field: "Sistem_grubu",
+    filter: true,
+    sortable: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Otel_kodu",
+    filter: true,
+    sortable: true,
+    hide: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Ulke_xml",
+    filter: true,
+    sortable: true,
+    hide: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Kulanici",
+    filter: true,
+    sortable: true,
+    hide: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+  {
+    field: "Acenta",
+    filter: true,
+    sortable: true,
+    hide: true,
+    valueFormatter: (params: any) =>
+      params.value && params.value !== "null" && params.value !== "undefined"
+        ? params.value
+        : "",
+  },
+];
+export const BlackLisFormFields = [
+  { label: "Id", key: "Id" },
+  { label: "Adı", key: "Adi" },
+  { label: "Soy Adı", key: "Soy" },
+  { label: "Açıklama", key: "Aciklama", type: "textarea" },
+];
+
+ 

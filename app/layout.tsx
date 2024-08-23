@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

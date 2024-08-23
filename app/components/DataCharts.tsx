@@ -18,7 +18,7 @@ const DataCharts = ({ data }: any) => {
          return {
           date: formattedDate,
           oda: item.Oda,
-          free: item.Free, // Free verisini de ekliyoruz
+          free: item.Free,  
 
  
         };

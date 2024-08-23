@@ -16,8 +16,7 @@ export async function POST(request: NextRequest) {
     if (response.status === 200) {
       const token = response.data;
 
-      const cookieStore = cookies();
-      cookieStore.set("token", token, {
+       cookies().set("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",

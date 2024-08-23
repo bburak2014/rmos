@@ -1,20 +1,14 @@
 "use client";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, SideBarDef } from "ag-grid-community";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useState, useMemo, useEffect } from "react";
 import axios from "axios";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
 import "ag-grid-charts-enterprise";
-import { AG_GRID_LOCALE_TR } from "@ag-grid-community/locale";
-import { gridHeads, initialValues } from "../interfaces/helper";
-import { DataGridProps } from "../interfaces";
+ import { stpGridHeads, initialValues } from "../helper/data";
+import { DataGridProps } from "../helper/interfaces";
 import LoadingUI from "./LoadingUI";
-
-const localeText: Record<string, string> = AG_GRID_LOCALE_TR;
-
+import { localeText } from "../helper/utils";
+  
 const DataGrid = ({ data, token }: DataGridProps) => {
   const sideBar = useMemo<
     SideBarDef | string | string[] | boolean | null
@@ -28,7 +22,7 @@ const DataGrid = ({ data, token }: DataGridProps) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [rowData, setRowData] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [columnDefs] = useState<ColDef[]>(gridHeads);
+  const [columnDefs] = useState<ColDef[]>(stpGridHeads);
   const [gridRendered, setGridRendered] = useState(false);
 
   useEffect(() => {
@@ -65,7 +59,7 @@ const DataGrid = ({ data, token }: DataGridProps) => {
 
   const handleSearch = async () => {
     setClicked(true);
-    try {
+     try {
       const response = await axios.post(`${Url}`, formValues, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -80,30 +74,35 @@ const DataGrid = ({ data, token }: DataGridProps) => {
   return (
     <>
       <div className="p-4 flex flex-col gap-10 min-h-screen">
-        <form className="flex flex-wrap justify-center">
+        <form>
           <h2 className="text-2xl font-bold mb-2 w-full">Filtrele</h2>
-          {Object.entries(formValues).map(([key, value]) => (
-            <div
-              key={key}
-              className="flex flex-col w-full sm:w-1/2 md:w-1/3 xl:w-1/6 p-2 gap-2"
-            >
-              <label
-                className="block text-sm font-medium text-gray-500 dark:text-white"
-                htmlFor={key}
+          <div className="flex flex-wrap gap-4">
+            {Object.entries(formValues).map(([key, value]) => (
+              <div
+                key={key}
+                className="flex flex-col w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] xl:w-[calc(16.66%-1rem)]  "
               >
-                {key}
-              </label>
-              <input
-                id={key}
-                type={getInputType(key, value)}
-                value={value || ""}
-                onChange={(e) => handleInputChange(key, e.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 p-2 text-sm rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-blue-300"
-                placeholder=""
-              />
-            </div>
-          ))}
-          <div className="flex flex-col w-full sm:w-1/2 md:w-1/3 xl:w-1/6 p-2 gap-2 justify-end">
+                <label
+                  className="block text-sm font-medium text-gray-500 dark:text-white"
+                  htmlFor={key}
+                >
+                  {key}
+                </label>
+                <input
+                  id={key}
+                  type={getInputType(key, value)}
+                  value={value || ""}
+                  onChange={(e) => handleInputChange(key, e.target.value)}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 p-2 text-sm rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-blue-300"
+                  placeholder=""
+                />
+              </div>
+            ))}
+          </div>
+          <div
+            className="flex flex-col w-full sm:w-1/2 md:w-1/3 xl:w-1/6 py-2 gap-2 my-8 justify-end"
+            style={{ float: "right" }}
+          >
             <button
               type="button"
               className=" text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 h-10"
@@ -133,7 +132,7 @@ const DataGrid = ({ data, token }: DataGridProps) => {
               localeText={localeText}
               domLayout="autoHeight"
               overlayNoRowsTemplate={"<span></span>"}
-
+              paginationPageSizeSelector={false}
             />
           </div>
         )}
