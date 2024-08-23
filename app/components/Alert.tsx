@@ -1,5 +1,5 @@
-import React from 'react'
-
+ // components/Alert.tsx
+ 
 type Props = {
     message: string;
     confirmMessage: string;

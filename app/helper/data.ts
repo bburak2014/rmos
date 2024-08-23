@@ -1,3 +1,4 @@
+// data.ts
 export const stpGridHeads = [
   {
     field: "Tarih",

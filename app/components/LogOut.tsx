@@ -1,3 +1,4 @@
+// app\components\LogOut.tsx
 "use client";
 
 import Image from "next/image";

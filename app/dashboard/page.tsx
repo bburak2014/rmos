@@ -1,3 +1,4 @@
+ // app\dashboard\page.tsx
  import { cookies } from "next/headers";
 import DataGrid from "@/app/components/DataGrid";
 import ErrorUI from "@/app/components/ErrorUI";

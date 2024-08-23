@@ -1,4 +1,4 @@
-  
+// app\components\ErrorUI.tsx  
 const ErrorUI = () => {
   return (
     <div className="flex items-center justify-center h-screen">

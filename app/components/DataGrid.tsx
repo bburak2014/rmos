@@ -1,3 +1,4 @@
+// app\components\DataGrid.tsx
 "use client";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, SideBarDef } from "ag-grid-community";

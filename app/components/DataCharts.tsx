@@ -1,3 +1,5 @@
+// app\components\DataCharts.tsx
+
 "use client";
 import React, { useState, useEffect } from "react";
 import { AgCharts } from "ag-charts-react";
