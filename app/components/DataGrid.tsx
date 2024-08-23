@@ -36,7 +36,7 @@ const DataGrid = ({ data, token }: DataGridProps) => {
   const Url = process.env.NEXT_PUBLIC_PROCEDURE_URL;
 
   // Determine input type based on value
-  const getInputType = (key: string, value: any) => {
+  const getInputType = (value: any): string => {
     if (typeof value === "number") {
       return "number";
     } else if (typeof value === "string" && dateRegex.test(value)) {
@@ -66,9 +66,16 @@ const DataGrid = ({ data, token }: DataGridProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setRowData(response.data.value);
+      if(response.data.isSucceded){
+        setRowData(response.data.value);
+      }
+      else {
+        alert(response.data.message);
+      }
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      alert("Hata");
     }
   };
 
@@ -91,9 +98,8 @@ const DataGrid = ({ data, token }: DataGridProps) => {
                 </label>
                 <input
                   id={key}
-                  type={getInputType(key, value)}
-                  value={value || ""}
-                  onChange={(e) => handleInputChange(key, e.target.value)}
+                  type={getInputType( value)}
+                  value={value !== undefined && value !== null ? String(value) : ""}                  onChange={(e) => handleInputChange(key, e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 p-2 text-sm rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-blue-300"
                   placeholder=""
                 />
